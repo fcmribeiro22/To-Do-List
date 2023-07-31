@@ -1,6 +1,6 @@
 import "./styles.css";
-import { handleProjectNameInput } from "./dom.js";
+import { addNewProject } from "./dom.js";
 
-handleProjectNameInput();
+addNewProject();
 
 const Projects = [];

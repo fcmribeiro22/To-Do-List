@@ -1,12 +1,11 @@
 // dom.js
 
-export function handleProjectNameInput() {
+export function addNewProject() {
   const projectsTabHeader = document.querySelector(".projects-tab-header");
-
+  const projectsPopup = document.querySelector(".projects-form-popup");
+  const darkOverlay = document.getElementById("darkOverlay");
   projectsTabHeader.addEventListener("click", () => {
-    const inputBox = document.createElement("input");
-    inputBox.setAttribute("type", "text");
-    inputBox.setAttribute("placeholder", "Enter project name");
-    console.log("clicked!");
+    projectsPopup.style.display = "flex";
+    darkOverlay.style.display = "block";
   });
 }
