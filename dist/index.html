@@ -10,29 +10,29 @@
       <h1>to-do list</h1>
     </header>
     <main>
-      <div id="darkOverlay"></div>
-
       <div class="projects-tab">
-        <p class="projects-tab-header">Add Project &emsp;&emsp;+</p>
+        <div class="projects-tab-header">Add Project &emsp;&emsp;+</div>
         <div class="projects-form-popup" id="myForm">
           <form class="form-container" action="">
             <p class="form-intro">
               Please fill the Project Name and "Add Project" at the end:
             </p>
             <label for="proj-name">Project Name</label>
-            <input type="text" id="proj-name" name="proj-name" required />
+            <input type="text" id="proj-name" name="proj-name" />
             <button type="submit" class="btn submit-button">Add Project</button>
             <button type="button" class="btn close-button">Cancel</button>
           </form>
         </div>
 
-        <div class="book-container"></div>
+        <div class="project-container"></div>
       </div>
 
       <div class="main-delimiter"></div>
       <div class="tasks-tab">
         <p>Scheduled</p>
       </div>
+
+      <div id="darkOverlay"></div>
     </main>
     <footer>
       <p class="copywright">&copy; 2023</p>
