@@ -12,7 +12,7 @@ export function addNewProject() {
   });
 
   const addProjectButton = document.querySelector(".submit-button");
-  addProjectButton.addEventListener("click", () => {
+  addProjectButton.addEventListener("click", (event) => {
     event.preventDefault();
     const projNameInput = document.getElementById("proj-name");
     const projectName = projNameInput.value.trim();
