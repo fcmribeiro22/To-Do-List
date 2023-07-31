@@ -7,3 +7,7 @@ export function addProjectToArray(projectName) {
 export function getProjectsArray() {
   return projects;
 }
+
+export function removeProject(index) {
+  projects.splice(index, 1);
+}

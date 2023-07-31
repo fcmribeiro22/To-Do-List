@@ -134,3 +134,24 @@ main {
 .open-button:hover {
   opacity: 1;
 }
+
+.project-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+}
+
+.project-card > button {
+  height: 50%;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 10px;
+}
+
+.project-card :hover {
+  background-color: #e7d2d2;
+}
