@@ -1,5 +1,11 @@
 // dom.js
-import { addProjectToArray, getProjectsArray, removeProject } from "./app.js";
+import {
+  addProjectToArray,
+  getProjectsArray,
+  removeProject,
+  addTasktoProject,
+} from "./app.js";
+import { createTask } from "./factory.js";
 
 export function addNewProject() {
   const projectsTabHeader = document.querySelector(".projects-tab-header");
@@ -63,28 +69,25 @@ export function printProject() {
 }
 
 export function addNewTask() {
-  const projectsTabHeader = document.querySelector(".projects-tab-header");
-  const projectsPopup = document.querySelector(".projects-form-popup");
+  const taskTabHeader = document.querySelector(".tasks-tab-header");
+  const taskPopup = document.querySelector(".task-form-popup");
   const darkOverlay = document.getElementById("darkOverlay");
 
-  projectsTabHeader.addEventListener("click", () => {
-    projectsPopup.style.display = "flex";
+  taskTabHeader.addEventListener("click", () => {
+    taskPopup.style.display = "flex";
     darkOverlay.style.display = "block";
   });
 
-  const addProjectButton = document.querySelector(".submit-button");
-  addProjectButton.addEventListener("click", (event) => {
+  const addTaskButton = document.querySelector(".submit-task-btn");
+  addTaskButton.addEventListener("click", (event) => {
     event.preventDefault();
-    const projNameInput = document.getElementById("proj-name");
-    const projectName = projNameInput.value.trim();
-    if (projectName !== "") {
-      addProjectToArray(projectName);
-      projNameInput.value = "";
-      console.log(getProjectsArray());
+    const taskNameInput = document.getElementById("task-name").value;
+    const taskDescription = document.getElementById("description-task").value;
+    const taskDueDate = document.getElementById("due-date-task").value;
+    const task = createTask(taskNameInput, taskDescription, taskDueDate);
+    addTasktoProject(0, task);
 
-      printProject();
-    }
-    projectsPopup.style.display = "none";
+    taskPopup.style.display = "none";
     darkOverlay.style.display = "none";
   });
 }

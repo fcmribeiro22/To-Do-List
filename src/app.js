@@ -1,6 +1,6 @@
-import { createProject, createTask } from "./factory";
+import { createProject } from "./factory";
 
-const projects = [];
+const projects = [{ project: "Sample", tasks: [] }];
 
 export function addProjectToArray(projectName) {
   const project = createProject(projectName);
@@ -13,4 +13,8 @@ export function getProjectsArray() {
 
 export function removeProject(index) {
   projects.splice(index, 1);
+}
+
+export function addTasktoProject(projectIndex, task) {
+  projects[projectIndex].tasks.push(task);
 }

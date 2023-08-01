@@ -2,11 +2,11 @@ export function createProject(project) {
   return { project, tasks: [] };
 }
 
-export function createTask(taskName, dueDate, priority) {
+export function createTask(task, description, duedate) {
   return {
-    task: taskName,
-    dueDate: dueDate,
-    priority: priority,
+    task,
+    description,
+    duedate,
     completed: false,
     toggleCompletion() {
       this.completed = !this.completed;
