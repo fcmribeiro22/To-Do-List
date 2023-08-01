@@ -53,7 +53,8 @@ main {
   border-right: solid 1px #e2d7d7;
 }
 
-.projects-tab-header:hover {
+.projects-tab-header:hover,
+.tasks-tab-header:hover {
   background-color: #e7d2d2;
 }
 

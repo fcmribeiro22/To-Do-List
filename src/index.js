@@ -1,4 +1,5 @@
 import "./styles.css";
-import { addNewProject } from "./dom.js";
+import { addNewProject, addNewTask } from "./dom.js";
 
 addNewProject();
+addNewTask();

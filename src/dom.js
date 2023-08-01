@@ -12,6 +12,7 @@ export function addNewProject() {
   });
 
   const addProjectButton = document.querySelector(".submit-button");
+  const closeProjectFormbutton = document.querySelector(".close-button");
   addProjectButton.addEventListener("click", (event) => {
     event.preventDefault();
     const projNameInput = document.getElementById("proj-name");
@@ -23,6 +24,12 @@ export function addNewProject() {
 
       printProject();
     }
+    projectsPopup.style.display = "none";
+    darkOverlay.style.display = "none";
+  });
+  closeProjectFormbutton.addEventListener("click", () => {
+    const projNameInput = document.getElementById("proj-name");
+    projNameInput.value = "";
     projectsPopup.style.display = "none";
     darkOverlay.style.display = "none";
   });
@@ -40,7 +47,7 @@ export function printProject() {
 
     const projectCreated = document.createElement("h2");
     projectCreated.classList.add("project-created");
-    projectCreated.textContent = newArray[i];
+    projectCreated.textContent = newArray[i].project;
     projectCard.appendChild(projectCreated);
 
     const deleteButton = document.createElement("button");
@@ -53,4 +60,31 @@ export function printProject() {
       printProject();
     });
   }
+}
+
+export function addNewTask() {
+  const projectsTabHeader = document.querySelector(".projects-tab-header");
+  const projectsPopup = document.querySelector(".projects-form-popup");
+  const darkOverlay = document.getElementById("darkOverlay");
+
+  projectsTabHeader.addEventListener("click", () => {
+    projectsPopup.style.display = "flex";
+    darkOverlay.style.display = "block";
+  });
+
+  const addProjectButton = document.querySelector(".submit-button");
+  addProjectButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const projNameInput = document.getElementById("proj-name");
+    const projectName = projNameInput.value.trim();
+    if (projectName !== "") {
+      addProjectToArray(projectName);
+      projNameInput.value = "";
+      console.log(getProjectsArray());
+
+      printProject();
+    }
+    projectsPopup.style.display = "none";
+    darkOverlay.style.display = "none";
+  });
 }

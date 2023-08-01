@@ -1,7 +1,10 @@
+import { createProject, createTask } from "./factory";
+
 const projects = [];
 
 export function addProjectToArray(projectName) {
-  projects.push(projectName);
+  const project = createProject(projectName);
+  projects.push(project);
 }
 
 export function getProjectsArray() {
