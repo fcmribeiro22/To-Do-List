@@ -1,6 +1,6 @@
 import { createProject } from "./factory";
 
-const projects = [{ project: "Sample", tasks: [] }];
+const projects = [{ project: "General", tasks: [] }];
 
 export function addProjectToArray(projectName) {
   const project = createProject(projectName);
