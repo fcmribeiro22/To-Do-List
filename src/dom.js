@@ -4,8 +4,21 @@ import {
   getProjectsArray,
   removeProject,
   addTasktoProject,
+  getProjectId,
 } from "./app.js";
 import { createTask } from "./factory.js";
+
+export function sampleArrayonDom() {
+  let newArray = getProjectsArray();
+  const projectsContainer = document.querySelector(".project-container");
+  const projectCard = document.createElement("div");
+  projectCard.classList.add("project-card");
+  projectsContainer.appendChild(projectCard);
+  const projectCreated = document.createElement("h2");
+  projectCreated.classList.add("project-created");
+  projectCreated.textContent = newArray[0].project;
+  projectCard.appendChild(projectCreated);
+}
 
 export function addNewProject() {
   const projectsTabHeader = document.querySelector(".projects-tab-header");
@@ -43,6 +56,7 @@ export function addNewProject() {
 
 export function printProject() {
   let newArray = getProjectsArray();
+
   const projectsContainer = document.querySelector(".project-container");
   projectsContainer.innerHTML = "";
 
@@ -79,6 +93,24 @@ export function addNewTask() {
   taskTabHeader.addEventListener("click", () => {
     taskPopup.style.display = "flex";
     darkOverlay.style.display = "block";
+    const taskNameInput = document.getElementById("task-name");
+    const taskDescription = document.getElementById("description-task");
+    const taskDueDate = document.getElementById("due-date-task");
+    taskNameInput.value = "";
+    taskDescription.value = "";
+    taskDueDate.value = "";
+
+    const projectDropdown = document.getElementById("projects-switch");
+    projectDropdown.innerHTML = "";
+
+    const projects = getProjectsArray();
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i];
+      const option = document.createElement("option");
+      option.value = i; // Set the value to the project index
+      option.textContent = project.project;
+      projectDropdown.appendChild(option);
+    }
   });
 
   const addTaskButton = document.querySelector(".submit-task-btn");
@@ -87,22 +119,16 @@ export function addNewTask() {
     const taskNameInput = document.getElementById("task-name").value;
     const taskDescription = document.getElementById("description-task").value;
     const taskDueDate = document.getElementById("due-date-task").value;
+    const projectDropdown = document.getElementById("projects-switch");
+    const selectedProjectIndex = parseInt(projectDropdown.value);
+
     const task = createTask(taskNameInput, taskDescription, taskDueDate);
-    addTasktoProject(0, task);
+    addTasktoProject(selectedProjectIndex, task);
 
     taskPopup.style.display = "none";
     darkOverlay.style.display = "none";
-  });
-}
 
-export function sampleArrayonDom() {
-  let newArray = getProjectsArray();
-  const projectsContainer = document.querySelector(".project-container");
-  const projectCard = document.createElement("div");
-  projectCard.classList.add("project-card");
-  projectsContainer.appendChild(projectCard);
-  const projectCreated = document.createElement("h2");
-  projectCreated.classList.add("project-created");
-  projectCreated.textContent = newArray[0].project;
-  projectCard.appendChild(projectCreated);
+    const projects = getProjectsArray();
+    console.log(projects);
+  });
 }
