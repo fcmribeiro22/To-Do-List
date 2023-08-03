@@ -30,7 +30,7 @@
       <div class="main-delimiter"></div>
       <div class="tasks-tab">
         <div class="tasks-tab-header">Add Task &emsp;&emsp;+</div>
-        <p>Scheduled</p>
+
         <div class="task-form-popup" id="myForm">
           <form class="form-container" action="">
             <p class="form-intro">
@@ -42,15 +42,18 @@
             <input type="text" id="description-task" name="description-task" />
             <label for="due-date-task">Due Date</label>
             <input type="text" id="due-date-task" name="due-date-task" />
+            <label for="projects-switch">Choose Project</label>
+            <select name="projects-switch" id="projects-switch"></select>
 
             <button type="submit" class="btn submit-button submit-task-btn">
-              Add Project
+              Add Task
             </button>
             <button type="button" class="btn close-button close-task-btn">
               Cancel
             </button>
           </form>
         </div>
+        <div class="task-container"></div>
       </div>
 
       <div id="darkOverlay"></div>
