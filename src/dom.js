@@ -4,9 +4,14 @@ import {
   getProjectsArray,
   removeProject,
   addTasktoProject,
-  getProjectId,
 } from "./app.js";
 import { createTask } from "./factory.js";
+
+export function initiateApp() {
+  sampleArrayonDom();
+  addNewProject();
+  addNewTask();
+}
 
 export function sampleArrayonDom() {
   let newArray = getProjectsArray();
@@ -107,7 +112,7 @@ export function addNewTask() {
     for (let i = 0; i < projects.length; i++) {
       const project = projects[i];
       const option = document.createElement("option");
-      option.value = i; // Set the value to the project index
+      option.value = i;
       option.textContent = project.project;
       projectDropdown.appendChild(option);
     }
@@ -127,8 +132,25 @@ export function addNewTask() {
 
     taskPopup.style.display = "none";
     darkOverlay.style.display = "none";
+    printTask();
 
     const projects = getProjectsArray();
     console.log(projects);
   });
+}
+
+export function printTask() {
+  const project = getProjectsArray();
+  const container = document.querySelector(".task-container");
+
+  for (let i = 0; i < project.length; i++) {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+    container.appendChild(taskCard);
+
+    const taskCreated = document.createElement("h2");
+    taskCreated.classList.add("task-created");
+    taskCreated.textContent = project[i].tasks;
+    taskCard.appendChild(taskCreated);
+  }
 }

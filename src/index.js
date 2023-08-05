@@ -1,6 +1,4 @@
 import "./styles.css";
-import { addNewProject, addNewTask, sampleArrayonDom } from "./dom.js";
+import { initiateApp } from "./dom.js";
 
-addNewProject();
-addNewTask();
-sampleArrayonDom();
+initiateApp();
