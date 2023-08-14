@@ -11,6 +11,7 @@ export function initiateApp() {
   sampleArrayonDom();
   addNewProject();
   addNewTask();
+  console.log('deployed')
 }
 
 export function sampleArrayonDom() {

@@ -1,7 +1,4 @@
-@font-face {
-  font-family: "Borel";
-  src: url(/home/fabio/Borel-Regular.ttf);
-}
+
 
 body {
   font-family: Arial, sans-serif;
@@ -30,7 +27,7 @@ p {
 
 header,
 footer {
-  font-family: "Borel", Arial, sans-serif;
+ 
   flex-shrink: 0;
   background-color: #e2d7d7;
   padding: 20px;
