@@ -1,4 +1,3 @@
-// dom.js
 import {
   addProjectToArray,
   getProjectsArray,
@@ -8,25 +7,16 @@ import {
 import { createTask } from "./factory.js";
 
 export function initiateApp() {
-  sampleArrayonDom();
-  addNewProject();
-  addNewTask();
-  console.log('deployed')
+  setupUIElements();
+  renderProjects();
 }
 
-export function sampleArrayonDom() {
-  let newArray = getProjectsArray();
-  const projectsContainer = document.querySelector(".project-container");
-  const projectCard = document.createElement("div");
-  projectCard.classList.add("project-card");
-  projectsContainer.appendChild(projectCard);
-  const projectCreated = document.createElement("h2");
-  projectCreated.classList.add("project-created");
-  projectCreated.textContent = newArray[0].project;
-  projectCard.appendChild(projectCreated);
+function setupUIElements() {
+  setupProjectsUI();
+  setupTasksUI();
 }
 
-export function addNewProject() {
+function setupProjectsUI() {
   const projectsTabHeader = document.querySelector(".projects-tab-header");
   const projectsPopup = document.querySelector(".projects-form-popup");
   const darkOverlay = document.getElementById("darkOverlay");
@@ -38,60 +28,65 @@ export function addNewProject() {
 
   const addProjectButton = document.querySelector(".submit-button");
   const closeProjectFormbutton = document.querySelector(".close-button");
-  addProjectButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const projNameInput = document.getElementById("proj-name");
-    const projectName = projNameInput.value.trim();
-    if (projectName !== "") {
-      addProjectToArray(projectName);
-      projNameInput.value = "";
-      console.log(getProjectsArray());
-
-      printProject();
-    }
-    projectsPopup.style.display = "none";
-    darkOverlay.style.display = "none";
-  });
-  closeProjectFormbutton.addEventListener("click", () => {
-    const projNameInput = document.getElementById("proj-name");
-    projNameInput.value = "";
-    projectsPopup.style.display = "none";
-    darkOverlay.style.display = "none";
-  });
+  addProjectButton.addEventListener("click", handleProjectAddition);
+  closeProjectFormbutton.addEventListener("click", closeProjectForm);
 }
 
-export function printProject() {
-  let newArray = getProjectsArray();
+function handleProjectAddition(event) {
+  event.preventDefault();
+  const projNameInput = document.getElementById("proj-name");
+  const projectName = projNameInput.value.trim();
+  if (projectName !== "") {
+    addProjectToArray(projectName);
+    projNameInput.value = "";
+    renderProjects();
+  }
+  closeProjectForm();
+}
 
+function closeProjectForm() {
+  const projNameInput = document.getElementById("proj-name");
+  projNameInput.value = "";
+  const projectsPopup = document.querySelector(".projects-form-popup");
+  const darkOverlay = document.getElementById("darkOverlay");
+  projectsPopup.style.display = "none";
+  darkOverlay.style.display = "none";
+}
+
+function renderProjects() {
+  let newArray = getProjectsArray();
   const projectsContainer = document.querySelector(".project-container");
   projectsContainer.innerHTML = "";
 
-  for (let i = 0; i < newArray.length; i++) {
+  newArray.forEach((project, index) => {
     const projectCard = document.createElement("div");
     projectCard.classList.add("project-card");
     projectsContainer.appendChild(projectCard);
 
     const projectCreated = document.createElement("h2");
     projectCreated.classList.add("project-created");
-    projectCreated.textContent = newArray[i].project;
+    projectCreated.textContent = project.project;
     projectCard.appendChild(projectCreated);
 
-    const deleteButton = document.createElement("button");
-
     if (newArray.length > 1) {
+      const deleteButton = document.createElement("button");
       deleteButton.classList.add("project-delete-btn");
       deleteButton.textContent = "Remove";
       projectCard.appendChild(deleteButton);
-    }
 
-    deleteButton.addEventListener("click", () => {
-      removeProject(i);
-      printProject();
-    });
-  }
+      deleteButton.addEventListener("click", () => {
+        handleProjectRemoval(index);
+      });
+    }
+  });
 }
 
-export function addNewTask() {
+function handleProjectRemoval(index) {
+  removeProject(index);
+  renderProjects();
+}
+
+function setupTasksUI() {
   const taskTabHeader = document.querySelector(".tasks-tab-header");
   const taskPopup = document.querySelector(".task-form-popup");
   const darkOverlay = document.getElementById("darkOverlay");
@@ -99,59 +94,74 @@ export function addNewTask() {
   taskTabHeader.addEventListener("click", () => {
     taskPopup.style.display = "flex";
     darkOverlay.style.display = "block";
-    const taskNameInput = document.getElementById("task-name");
-    const taskDescription = document.getElementById("description-task");
-    const taskDueDate = document.getElementById("due-date-task");
-    taskNameInput.value = "";
-    taskDescription.value = "";
-    taskDueDate.value = "";
-
-    const projectDropdown = document.getElementById("projects-switch");
-    projectDropdown.innerHTML = "";
-
-    const projects = getProjectsArray();
-    for (let i = 0; i < projects.length; i++) {
-      const project = projects[i];
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = project.project;
-      projectDropdown.appendChild(option);
-    }
+    setupTaskForm();
   });
 
   const addTaskButton = document.querySelector(".submit-task-btn");
-  addTaskButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const taskNameInput = document.getElementById("task-name").value;
-    const taskDescription = document.getElementById("description-task").value;
-    const taskDueDate = document.getElementById("due-date-task").value;
-    const projectDropdown = document.getElementById("projects-switch");
-    const selectedProjectIndex = parseInt(projectDropdown.value);
+  addTaskButton.addEventListener("click", handleTaskAddition);
+}
 
-    const task = createTask(taskNameInput, taskDescription, taskDueDate);
-    addTasktoProject(selectedProjectIndex, task);
+function setupTaskForm() {
+  const taskNameInput = document.getElementById("task-name");
+  const taskDescription = document.getElementById("description-task");
+  const taskDueDate = document.getElementById("due-date-task");
+  taskNameInput.value = "";
+  taskDescription.value = "";
+  taskDueDate.value = "";
 
-    taskPopup.style.display = "none";
-    darkOverlay.style.display = "none";
-    printTask();
+  const projectDropdown = document.getElementById("projects-switch");
+  projectDropdown.innerHTML = "";
 
-    const projects = getProjectsArray();
-    console.log(projects);
+  const projects = getProjectsArray();
+  projects.forEach((project, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = project.project;
+    projectDropdown.appendChild(option);
   });
 }
 
-export function printTask() {
-  const project = getProjectsArray();
+function handleTaskAddition(event) {
+  const projects = getProjectsArray();
+  event.preventDefault();
+  const taskNameInput = document.getElementById("task-name").value;
+  const taskDescription = document.getElementById("description-task").value;
+  const taskDueDate = document.getElementById("due-date-task").value;
+  const projectDropdown = document.getElementById("projects-switch");
+  const selectedProjectIndex = parseInt(projectDropdown.value);
+
+  const task = createTask(taskNameInput, taskDescription, taskDueDate);
+  addTasktoProject(selectedProjectIndex, task);
+
+  closeTaskForm();
+  renderTasks();
+  console.log(projects);
+}
+
+function closeTaskForm() {
+  const taskPopup = document.querySelector(".task-form-popup");
+  const darkOverlay = document.getElementById("darkOverlay");
+  taskPopup.style.display = "none";
+  darkOverlay.style.display = "none";
+}
+
+function renderTasks() {
+  const projects = getProjectsArray();
   const container = document.querySelector(".task-container");
+  container.innerHTML = "";
 
-  for (let i = 0; i < project.length; i++) {
-    const taskCard = document.createElement("div");
-    taskCard.classList.add("task-card");
-    container.appendChild(taskCard);
+  projects.forEach((project) => {
+    const projectName = project.project;
 
-    const taskCreated = document.createElement("h2");
-    taskCreated.classList.add("task-created");
-    taskCreated.textContent = project[i].tasks;
-    taskCard.appendChild(taskCreated);
-  }
+    project.tasks.forEach((task) => {
+      const taskCard = document.createElement("div");
+      taskCard.classList.add("task-card");
+      container.appendChild(taskCard);
+
+      const taskCreated = document.createElement("h2");
+      taskCreated.classList.add("task-created");
+      taskCreated.textContent = `Project: ${projectName}, Task: ${task.name}`;
+      taskCard.appendChild(taskCreated);
+    });
+  });
 }

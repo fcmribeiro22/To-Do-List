@@ -7,9 +7,5 @@ export function createTask(task, description, duedate) {
     task,
     description,
     duedate,
-    completed: false,
-    toggleCompletion() {
-      this.completed = !this.completed;
-    },
   };
 }
