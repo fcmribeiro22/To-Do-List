@@ -1,5 +1,5 @@
 export function createProject(project) {
-  return { project, tasks: [] };
+  return { project, tasks: [], selected: false };
 }
 
 export function createTask(task, description, duedate) {

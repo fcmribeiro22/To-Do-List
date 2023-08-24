@@ -61,6 +61,9 @@ function renderProjects() {
   newArray.forEach((project, index) => {
     const projectCard = document.createElement("div");
     projectCard.classList.add("project-card");
+    if (newArray[index].selected) {
+      projectCard.classList.add("project-selected");
+    }
     projectsContainer.appendChild(projectCard);
 
     const projectCreated = document.createElement("h2");
@@ -71,7 +74,7 @@ function renderProjects() {
     if (newArray.length > 1) {
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("project-delete-btn");
-      deleteButton.textContent = "Remove";
+      deleteButton.textContent = "X";
       projectCard.appendChild(deleteButton);
 
       deleteButton.addEventListener("click", () => {
@@ -151,8 +154,6 @@ function renderTasks() {
   container.innerHTML = "";
 
   projects.forEach((project) => {
-    const projectName = project.project;
-
     project.tasks.forEach((task) => {
       const taskCard = document.createElement("div");
       taskCard.classList.add("task-card");
@@ -160,7 +161,7 @@ function renderTasks() {
 
       const taskCreated = document.createElement("h2");
       taskCreated.classList.add("task-created");
-      taskCreated.textContent = `Project: ${projectName}, Task: ${task.name}`;
+      taskCreated.textContent = `Task: ${task.task}`;
       taskCard.appendChild(taskCreated);
     });
   });
