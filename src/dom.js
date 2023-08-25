@@ -36,11 +36,17 @@ function handleProjectAddition(event) {
   event.preventDefault();
   const projNameInput = document.getElementById("proj-name");
   const projectName = projNameInput.value.trim();
-  if (projectName !== "") {
+  const projectArray = getProjectsArray();
+  if (projectArray.length < 5 && projectName !== "") {
     addProjectToArray(projectName);
     projNameInput.value = "";
     renderProjects();
+  } else {
+    alert(
+      "Maximum of 5 projects achieved. Upgrade to premium to get full access."
+    );
   }
+
   closeProjectForm();
 }
 
@@ -74,7 +80,7 @@ function renderProjects() {
     if (newArray.length > 1) {
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("project-delete-btn");
-      deleteButton.textContent = "X";
+      deleteButton.textContent = "-";
       projectCard.appendChild(deleteButton);
 
       deleteButton.addEventListener("click", () => {

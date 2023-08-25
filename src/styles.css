@@ -135,25 +135,30 @@ main {
   justify-content: space-between;
   padding: 10px;
   align-items: center;
-  height: 10px;
+  height: 25px;
   border-radius: 30px;
   margin-top: 15px;
 }
 
 .project-delete-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: none;
   cursor: pointer;
   background-color: rgb(219, 83, 83);
-  border-radius: 50%;
-}
-
-.project-card :hover {
-  background-color: #e7d2d2;
+  border-radius: 30px;
+  height: 25px;
 }
 
 .project-selected {
   background-color: #04aa6d;
+  opacity: 0.8;
+}
+
+.project-selected:hover {
+  opacity: 1;
+}
+
+.project-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
