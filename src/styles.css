@@ -45,6 +45,7 @@ main {
   padding: 20px;
   padding-top: 10px;
   border-right: solid 1px #e2d7d7;
+  cursor: pointer;
 }
 
 .projects-tab-header:hover,
@@ -137,7 +138,7 @@ main {
   align-items: center;
   height: 25px;
   border-radius: 30px;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .project-delete-btn {

@@ -14,6 +14,7 @@ export function initiateApp() {
 function setupUIElements() {
   setupProjectsUI();
   setupTasksUI();
+  toggleSelection();
 }
 
 function setupProjectsUI() {
@@ -170,5 +171,32 @@ function renderTasks() {
       taskCreated.textContent = `Task: ${task.task}`;
       taskCard.appendChild(taskCreated);
     });
+  });
+}
+
+function toggleSelection() {
+  const projectsContainer = document.querySelector(".project-container");
+  const projectsArray = getProjectsArray();
+
+  projectsContainer.addEventListener("click", (event) => {
+    const clickedProjectCard = event.target.closest(".project-card");
+
+    if (clickedProjectCard) {
+      const projectIndex = Array.from(projectsContainer.children).indexOf(
+        clickedProjectCard
+      );
+
+      projectsArray.forEach((project, index) => {
+        if (index !== projectIndex) {
+          project.selected = false;
+        }
+      });
+
+      projectsArray[projectIndex].selected =
+        !projectsArray[projectIndex].selected;
+
+      console.log(projectsArray);
+      renderProjects();
+    }
   });
 }
