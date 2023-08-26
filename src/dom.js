@@ -14,7 +14,6 @@ export function initiateApp() {
 function setupUIElements() {
   setupProjectsUI();
   setupTasksUI();
-  toggleSelection();
 }
 
 function setupProjectsUI() {
@@ -89,6 +88,7 @@ function renderProjects() {
       });
     }
   });
+  handleProjectSelectionEvent();
 }
 
 function handleProjectRemoval(index) {
@@ -174,29 +174,14 @@ function renderTasks() {
   });
 }
 
-function toggleSelection() {
-  const projectsContainer = document.querySelector(".project-container");
-  const projectsArray = getProjectsArray();
-
-  projectsContainer.addEventListener("click", (event) => {
-    const clickedProjectCard = event.target.closest(".project-card");
-
-    if (clickedProjectCard) {
-      const projectIndex = Array.from(projectsContainer.children).indexOf(
-        clickedProjectCard
-      );
-
-      projectsArray.forEach((project, index) => {
-        if (index !== projectIndex) {
-          project.selected = false;
-        }
-      });
-
-      projectsArray[projectIndex].selected =
-        !projectsArray[projectIndex].selected;
-
-      console.log(projectsArray);
+function handleProjectSelectionEvent() {
+  const projects = document.querySelectorAll(".project-card");
+  const projectArray = getProjectsArray();
+  projects.forEach((project, index) => {
+    project.addEventListener("click", () => {
+      projectArray.forEach((project) => (project.selected = false));
+      projectArray[index].selected = true;
       renderProjects();
-    }
+    });
   });
 }
