@@ -144,7 +144,7 @@ function handleTaskAddition(event) {
   addTasktoProject(selectedProjectIndex, task);
 
   closeTaskForm();
-  renderTasks();
+  printCorrespondingTaskAfterSelection();
   console.log(projects);
 }
 
@@ -155,25 +155,6 @@ function closeTaskForm() {
   darkOverlay.style.display = "none";
 }
 
-function renderTasks() {
-  const projects = getProjectsArray();
-  const container = document.querySelector(".task-container");
-  container.innerHTML = "";
-
-  projects.forEach((project) => {
-    project.tasks.forEach((task) => {
-      const taskCard = document.createElement("div");
-      taskCard.classList.add("task-card");
-      container.appendChild(taskCard);
-
-      const taskCreated = document.createElement("h2");
-      taskCreated.classList.add("task-created");
-      taskCreated.textContent = `Task: ${task.task}`;
-      taskCard.appendChild(taskCreated);
-    });
-  });
-}
-
 function handleProjectSelectionEvent() {
   const projects = document.querySelectorAll(".project-card");
   const projectArray = getProjectsArray();
@@ -182,6 +163,31 @@ function handleProjectSelectionEvent() {
       projectArray.forEach((project) => (project.selected = false));
       projectArray[index].selected = true;
       renderProjects();
+      printCorrespondingTaskAfterSelection();
     });
   });
+}
+
+function printCorrespondingTaskAfterSelection() {
+  let index = 0;
+  const projectArray = getProjectsArray();
+  const container = document.querySelector(".task-container");
+  container.innerHTML = "";
+
+  for (let i = 0; i < projectArray.length; i++) {
+    if (projectArray[i].selected === true) {
+      index = i;
+    }
+  }
+
+  for (let i = 0; i < projectArray[index].tasks.length; i++) {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+    container.appendChild(taskCard);
+
+    const taskCreated = document.createElement("h2");
+    taskCreated.classList.add("task-created");
+    taskCreated.textContent = "Hey";
+    taskCard.appendChild(taskCreated);
+  }
 }
