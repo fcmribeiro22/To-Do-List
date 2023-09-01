@@ -89,6 +89,7 @@ function renderProjects() {
     }
   });
   handleProjectSelectionEvent();
+  console.log(newArray);
 }
 
 function handleProjectRemoval(index) {
@@ -185,9 +186,12 @@ function printCorrespondingTaskAfterSelection() {
     taskCard.classList.add("task-card");
     container.appendChild(taskCard);
 
-    const taskCreated = document.createElement("h2");
-    taskCreated.classList.add("task-created");
-    taskCreated.textContent = "Hey";
-    taskCard.appendChild(taskCreated);
+    const title = document.createElement("h2");
+    title.textContent = projectArray[index].tasks[i].task;
+    taskCard.appendChild(title);
+
+    const description = document.createElement("p");
+    description.textContent = projectArray[index].tasks[i].description;
+    taskCard.appendChild(description);
   }
 }
