@@ -181,3 +181,7 @@ main {
   width: 100px;
   height: 100px;
 }
+
+.tasks-tab-header {
+  margin-bottom: 30px;
+}
