@@ -18,6 +18,7 @@ function setupUIElements() {
 
 function setupProjectsUI() {
   const projectsTabHeader = document.querySelector(".projects-tab-header");
+
   const projectsPopup = document.querySelector(".projects-form-popup");
   const darkOverlay = document.getElementById("darkOverlay");
 
@@ -80,7 +81,7 @@ function renderProjects() {
     if (newArray.length > 1) {
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("project-delete-btn");
-      deleteButton.textContent = "-";
+      deleteButton.textContent = "Remove";
       projectCard.appendChild(deleteButton);
 
       deleteButton.addEventListener("click", () => {
