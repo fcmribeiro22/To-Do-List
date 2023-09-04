@@ -48,10 +48,17 @@ main {
   cursor: pointer;
 }
 
+.projects-tab-header,
+.tasks-tab-header {
+  width: 50%;
+  border-radius: 30px;
+  padding: 7px;
+}
+
 .projects-tab-header:hover,
 .tasks-tab-header:hover,
 .projects-tab-header-delete:hover {
-  background-color: #e7d2d2;
+  background-color: #dfd5d5;
 }
 
 .tasks-tab {
@@ -92,7 +99,8 @@ main {
 }
 
 .form-container input[type="text"],
-.form-container input[type="number"] {
+.form-container input[type="number"],
+.form-container input[type="date"] {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -173,15 +181,14 @@ main {
 
 .task-card {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
   align-items: center;
-  border: 0.5px solid #04aa6d;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 20px;
-  width: 150px;
-  height: 150px;
+  height: 25px;
+  border-radius: 30px;
+  opacity: 0.8;
+  background-color: #04aa6d;
 }
 
 .tasks-tab-header {

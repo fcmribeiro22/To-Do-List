@@ -125,6 +125,7 @@ function setupTaskForm() {
   projectDropdown.innerHTML = "";
 
   const projects = getProjectsArray();
+
   projects.forEach((project, index) => {
     const option = document.createElement("option");
     option.value = index;
@@ -136,11 +137,17 @@ function setupTaskForm() {
 function handleTaskAddition(event) {
   const projects = getProjectsArray();
   event.preventDefault();
+
   const taskNameInput = document.getElementById("task-name").value;
   const taskDescription = document.getElementById("description-task").value;
   const taskDueDate = document.getElementById("due-date-task").value;
   const projectDropdown = document.getElementById("projects-switch");
   const selectedProjectIndex = parseInt(projectDropdown.value);
+
+  if (!taskNameInput || !taskDueDate) {
+    alert("Please provide both a title and a due date for the task.");
+    return;
+  }
 
   const task = createTask(taskNameInput, taskDescription, taskDueDate);
   addTasktoProject(selectedProjectIndex, task);
@@ -190,10 +197,6 @@ function printCorrespondingTaskAfterSelection() {
     const title = document.createElement("h2");
     title.textContent = projectArray[index].tasks[i].task;
     taskCard.appendChild(title);
-
-    const description = document.createElement("p");
-    description.textContent = projectArray[index].tasks[i].description;
-    taskCard.appendChild(description);
 
     const dueDate = document.createElement("p");
     dueDate.textContent = projectArray[index].tasks[i].duedate;
