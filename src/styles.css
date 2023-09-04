@@ -37,7 +37,7 @@ main {
   flex-grow: 1;
   padding: 20px;
   padding-top: 10px;
-  background-color: rgb(235, 224, 211);
+  background-color: rgb(254, 254, 254);
 }
 
 .projects-tab {
@@ -175,12 +175,13 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   border: 0.5px solid #04aa6d;
   border-radius: 10px;
-  background: #f1f1f1;
+  background: #ffffff;
   padding: 20px;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 }
 
 .tasks-tab-header {

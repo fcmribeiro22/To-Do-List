@@ -194,5 +194,9 @@ function printCorrespondingTaskAfterSelection() {
     const description = document.createElement("p");
     description.textContent = projectArray[index].tasks[i].description;
     taskCard.appendChild(description);
+
+    const dueDate = document.createElement("p");
+    dueDate.textContent = projectArray[index].tasks[i].duedate;
+    taskCard.appendChild(dueDate);
   }
 }
