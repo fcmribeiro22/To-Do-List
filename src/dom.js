@@ -111,6 +111,9 @@ function setupTasksUI() {
 
   const addTaskButton = document.querySelector(".submit-task-btn");
   addTaskButton.addEventListener("click", handleTaskAddition);
+
+  const closeTaskButton = document.querySelector(".close-task-btn");
+  closeTaskButton.addEventListener("click", closeTaskForm);
 }
 
 function setupTaskForm() {
