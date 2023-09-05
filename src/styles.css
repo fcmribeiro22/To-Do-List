@@ -109,7 +109,8 @@ main {
 
 .form-container input[type="text"],
 .form-container input[type="number"],
-.form-container input[type="date"] {
+.form-container input[type="date"],
+.form-container select {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -118,9 +119,9 @@ main {
   border-radius: 5px;
 }
 
-/* When the inputs get focus, do something */
 .form-container input[type="text"]:focus,
-.form-container input[type="number"]:focus {
+.form-container input[type="number"]:focus,
+.form-container input[type="date"]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -199,10 +200,26 @@ main {
   height: 25px;
   border-radius: 30px;
   opacity: 0.8;
-  background-color: #04aa6d;
+  background-color: #c1e441;
   padding-left: 15px;
+}
+
+.task-card-high-priority {
+  background-color: #c40707;
+}
+
+.task-card-low-priority {
+  background-color: #04aa6d;
 }
 
 .tasks-tab-header {
   margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  align-items: center;
+  justify-content: center;
 }

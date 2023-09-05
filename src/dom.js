@@ -144,6 +144,7 @@ function handleTaskAddition(event) {
   const taskNameInput = document.getElementById("task-name").value;
   const taskDescription = document.getElementById("description-task").value;
   const taskDueDate = document.getElementById("due-date-task").value;
+  const priority = document.getElementById("priority-switch").value;
   const projectDropdown = document.getElementById("projects-switch");
   const selectedProjectIndex = parseInt(projectDropdown.value);
 
@@ -152,7 +153,12 @@ function handleTaskAddition(event) {
     return;
   }
 
-  const task = createTask(taskNameInput, taskDescription, taskDueDate);
+  const task = createTask(
+    taskNameInput,
+    taskDescription,
+    taskDueDate,
+    priority
+  );
   addTasktoProject(selectedProjectIndex, task);
 
   closeTaskForm();
@@ -195,6 +201,14 @@ function printCorrespondingTaskAfterSelection() {
   for (let i = 0; i < projectArray[index].tasks.length; i++) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("task-card");
+    switch (projectArray[index].tasks[i].priority) {
+      case "High":
+        taskCard.classList.add("task-card-high-priority");
+        break;
+      case "Low":
+        taskCard.classList.add("task-card-low-priority");
+        break;
+    }
     container.appendChild(taskCard);
 
     const title = document.createElement("h2");
@@ -206,3 +220,7 @@ function printCorrespondingTaskAfterSelection() {
     taskCard.appendChild(dueDate);
   }
 }
+
+//.task-card-high-priority {
+// background-color: #aa1a04;
+//}

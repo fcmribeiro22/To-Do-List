@@ -4,7 +4,7 @@ export function createProject(project) {
   return { project, tasks: [], selected: false };
 }
 
-export function createTask(task, description, duedate) {
+export function createTask(task, description, duedate, priority) {
   const today = format(new Date(), "yyyy-MM-dd");
 
   return {
@@ -12,5 +12,6 @@ export function createTask(task, description, duedate) {
     description,
     duedate,
     creation: today,
+    priority,
   };
 }
