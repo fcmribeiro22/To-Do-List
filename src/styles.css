@@ -47,7 +47,8 @@ main {
   background-color: rgb(254, 254, 254);
 }
 
-.projects-tab {
+.projects-tab,
+.tasks-tab {
   flex: 0.5;
   padding: 20px;
   padding-top: 10px;
@@ -214,6 +215,8 @@ main {
 
 .tasks-tab-header {
   margin-bottom: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .form-group {
@@ -222,4 +225,14 @@ main {
   width: auto;
   align-items: center;
   justify-content: center;
+}
+
+.tab-header-container {
+  display: flex;
+}
+
+.task-tutorial {
+  font-weight: lighter;
+  padding: 0;
+  margin: 0;
 }

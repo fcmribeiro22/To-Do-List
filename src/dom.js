@@ -218,9 +218,10 @@ function printCorrespondingTaskAfterSelection() {
     const dueDate = document.createElement("p");
     dueDate.textContent = projectArray[index].tasks[i].duedate;
     taskCard.appendChild(dueDate);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("task-complete-btn");
+    deleteButton.textContent = "Mark as completed";
+    taskCard.appendChild(deleteButton);
   }
 }
-
-//.task-card-high-priority {
-// background-color: #aa1a04;
-//}
