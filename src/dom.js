@@ -221,7 +221,7 @@ function printCorrespondingTaskAfterSelection() {
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("task-complete-btn");
-    deleteButton.textContent = "Mark as completed";
+    deleteButton.textContent = "Click to complete";
     taskCard.appendChild(deleteButton);
   }
 }
