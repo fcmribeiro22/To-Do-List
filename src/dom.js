@@ -230,6 +230,22 @@ function renderTasksUI() {
         description.style.display = "block";
         description.textContent = projectArray[index].tasks[i].description;
         taskCard.appendChild(description);
+        const editButton = document.createElement("button");
+        editButton.classList.add("edit-task-button");
+        editButton.textContent = "Edit";
+        taskCard.appendChild(editButton);
+
+        function taskCardClickListener() {
+          projectArray[index].tasks[i].toggleExpanded();
+          renderTasksUI();
+        }
+
+        function editTaskCard(event) {
+          event.stopPropagation();
+          taskCard.removeEventListener("click", taskCardClickListener);
+        }
+
+        editButton.addEventListener("click", editTaskCard);
       }
 
       const deleteButton = document.createElement("button");

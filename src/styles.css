@@ -163,7 +163,8 @@ main {
 }
 
 .project-delete-btn,
-.task-complete-btn {
+.task-complete-btn,
+.edit-task-button {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -181,7 +182,8 @@ main {
 }
 
 .project-delete-btn:hover,
-.task-complete-btn:hover {
+.task-complete-btn:hover,
+.edit-task-button:hover {
   text-decoration: underline;
 }
 
