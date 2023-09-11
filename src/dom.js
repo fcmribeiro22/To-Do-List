@@ -212,6 +212,11 @@ function renderTasksUI() {
       }
       container.appendChild(taskCard);
 
+      taskCard.addEventListener("click", () => {
+        projectArray[index].tasks[i].toggleExpanded();
+        renderTasksUI();
+      });
+
       const title = document.createElement("h2");
       title.textContent = projectArray[index].tasks[i].task;
       taskCard.appendChild(title);
@@ -219,6 +224,13 @@ function renderTasksUI() {
       const dueDate = document.createElement("p");
       dueDate.textContent = projectArray[index].tasks[i].duedate;
       taskCard.appendChild(dueDate);
+
+      if (projectArray[index].tasks[i].expanded == true) {
+        const description = document.createElement("p");
+        description.style.display = "block";
+        description.textContent = projectArray[index].tasks[i].description;
+        taskCard.appendChild(description);
+      }
 
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("task-complete-btn");

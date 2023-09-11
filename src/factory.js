@@ -13,6 +13,10 @@ export function createTask(task, description, duedate, priority) {
     duedate,
     creation: today,
     priority,
+    expanded: false,
+    toggleExpanded: function () {
+      this.expanded = !this.expanded;
+    },
     completed: false,
     toggleCompletion: function () {
       this.completed = !this.completed;
