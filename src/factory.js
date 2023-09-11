@@ -13,5 +13,9 @@ export function createTask(task, description, duedate, priority) {
     duedate,
     creation: today,
     priority,
+    completed: false,
+    toggleCompletion: function () {
+      this.completed = !this.completed;
+    },
   };
 }

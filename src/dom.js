@@ -162,7 +162,7 @@ function handleTaskAddition(event) {
   addTasktoProject(selectedProjectIndex, task);
 
   closeTaskForm();
-  printCorrespondingTaskAfterSelection();
+  renderTasksUI();
   console.log(projects);
 }
 
@@ -181,12 +181,12 @@ function handleProjectSelectionEvent() {
       projectArray.forEach((project) => (project.selected = false));
       projectArray[index].selected = true;
       renderProjects();
-      printCorrespondingTaskAfterSelection();
+      renderTasksUI();
     });
   });
 }
 
-function printCorrespondingTaskAfterSelection() {
+function renderTasksUI() {
   let index = 0;
   const projectArray = getProjectsArray();
   const container = document.querySelector(".task-container");
@@ -199,29 +199,35 @@ function printCorrespondingTaskAfterSelection() {
   }
 
   for (let i = 0; i < projectArray[index].tasks.length; i++) {
-    const taskCard = document.createElement("div");
-    taskCard.classList.add("task-card");
-    switch (projectArray[index].tasks[i].priority) {
-      case "High":
-        taskCard.classList.add("task-card-high-priority");
-        break;
-      case "Low":
-        taskCard.classList.add("task-card-low-priority");
-        break;
+    if (projectArray[index].tasks[i].completed == false) {
+      const taskCard = document.createElement("div");
+      taskCard.classList.add("task-card");
+      switch (projectArray[index].tasks[i].priority) {
+        case "High":
+          taskCard.classList.add("task-card-high-priority");
+          break;
+        case "Low":
+          taskCard.classList.add("task-card-low-priority");
+          break;
+      }
+      container.appendChild(taskCard);
+
+      const title = document.createElement("h2");
+      title.textContent = projectArray[index].tasks[i].task;
+      taskCard.appendChild(title);
+
+      const dueDate = document.createElement("p");
+      dueDate.textContent = projectArray[index].tasks[i].duedate;
+      taskCard.appendChild(dueDate);
+
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("task-complete-btn");
+      deleteButton.textContent = "Click to complete";
+      taskCard.appendChild(deleteButton);
+      deleteButton.addEventListener("click", () => {
+        projectArray[index].tasks[i].toggleCompletion();
+        renderTasksUI();
+      });
     }
-    container.appendChild(taskCard);
-
-    const title = document.createElement("h2");
-    title.textContent = projectArray[index].tasks[i].task;
-    taskCard.appendChild(title);
-
-    const dueDate = document.createElement("p");
-    dueDate.textContent = projectArray[index].tasks[i].duedate;
-    taskCard.appendChild(dueDate);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.classList.add("task-complete-btn");
-    deleteButton.textContent = "Click to complete";
-    taskCard.appendChild(deleteButton);
   }
 }

@@ -162,10 +162,11 @@ main {
   margin-top: 30px;
 }
 
-.project-delete-btn {
+.project-delete-btn,
+.task-complete-btn {
   border: none;
   cursor: pointer;
-  background-color: rgb(219, 83, 83);
+  background-color: transparent;
   border-radius: 30px;
   height: 25px;
 }
@@ -177,6 +178,11 @@ main {
 
 .project-selected:hover {
   opacity: 1;
+}
+
+.project-delete-btn:hover,
+.task-complete-btn:hover {
+  text-decoration: underline;
 }
 
 .project-container {
