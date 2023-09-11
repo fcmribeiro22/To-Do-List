@@ -5,6 +5,7 @@ import {
   addTasktoProject,
 } from "./app.js";
 import { createTask } from "./factory.js";
+import { parseISO, compareAsc } from "date-fns";
 
 export function initiateApp() {
   setupUIElements();
@@ -38,14 +39,16 @@ function handleProjectAddition(event) {
   const projNameInput = document.getElementById("proj-name");
   const projectName = projNameInput.value.trim();
   const projectArray = getProjectsArray();
-  if (projectArray.length < 5 && projectName !== "") {
-    addProjectToArray(projectName);
-    projNameInput.value = "";
-    renderProjects();
-  } else {
-    alert(
-      "Maximum of 5 projects achieved. Upgrade to premium to get full access."
-    );
+  if (projectName != "") {
+    if (projectArray.length < 5) {
+      addProjectToArray(projectName);
+      projNameInput.value = "";
+      renderProjects();
+    } else {
+      alert(
+        "Maximum of 5 projects achieved. Upgrade to premium to get full access."
+      );
+    }
   }
 
   closeProjectForm();
@@ -86,6 +89,7 @@ function renderProjects() {
 
       deleteButton.addEventListener("click", () => {
         handleProjectRemoval(index);
+        renderProjects();
       });
     }
   });
@@ -95,7 +99,6 @@ function renderProjects() {
 
 function handleProjectRemoval(index) {
   removeProject(index);
-  renderProjects();
 }
 
 function setupTasksUI() {
@@ -198,11 +201,18 @@ function renderTasksUI() {
     }
   }
 
-  for (let i = 0; i < projectArray[index].tasks.length; i++) {
-    if (projectArray[index].tasks[i].completed == false) {
+  const sortedTasks = projectArray[index].tasks
+    .filter((task) => !task.completed)
+    .sort((taskA, taskB) =>
+      compareAsc(parseISO(taskA.duedate), parseISO(taskB.duedate))
+    );
+
+  for (let i = 0; i < sortedTasks.length; i++) {
+    const task = sortedTasks[i];
+    if (task.completed == false) {
       const taskCard = document.createElement("div");
       taskCard.classList.add("task-card");
-      switch (projectArray[index].tasks[i].priority) {
+      switch (task.priority) {
         case "High":
           taskCard.classList.add("task-card-high-priority");
           break;
@@ -213,22 +223,22 @@ function renderTasksUI() {
       container.appendChild(taskCard);
 
       taskCard.addEventListener("click", () => {
-        projectArray[index].tasks[i].toggleExpanded();
+        task.toggleExpanded();
         renderTasksUI();
       });
 
       const title = document.createElement("h2");
-      title.textContent = projectArray[index].tasks[i].task;
+      title.textContent = task.task;
       taskCard.appendChild(title);
 
       const dueDate = document.createElement("p");
-      dueDate.textContent = projectArray[index].tasks[i].duedate;
+      dueDate.textContent = task.duedate;
       taskCard.appendChild(dueDate);
 
-      if (projectArray[index].tasks[i].expanded == true) {
+      if (task.expanded == true) {
         const description = document.createElement("p");
         description.style.display = "block";
-        description.textContent = projectArray[index].tasks[i].description;
+        description.textContent = task.description;
         taskCard.appendChild(description);
         const editButton = document.createElement("button");
         editButton.classList.add("edit-task-button");
@@ -236,7 +246,7 @@ function renderTasksUI() {
         taskCard.appendChild(editButton);
 
         function taskCardClickListener() {
-          projectArray[index].tasks[i].toggleExpanded();
+          task.toggleExpanded();
           renderTasksUI();
         }
 
@@ -253,7 +263,7 @@ function renderTasksUI() {
       deleteButton.textContent = "Click to complete";
       taskCard.appendChild(deleteButton);
       deleteButton.addEventListener("click", () => {
-        projectArray[index].tasks[i].toggleCompletion();
+        task.toggleCompletion();
         renderTasksUI();
       });
     }
