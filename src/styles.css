@@ -244,3 +244,41 @@ main {
   padding: 0;
   margin: 0;
 }
+
+.descriptive-p {
+  display: flex;
+  gap: 20px;
+}
+
+.tasks-tab {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.descriptive-divs {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.descriptive-divs button {
+  outline: none;
+  border: none;
+  width: 200px;
+  border-radius: 30px;
+  padding: 6px;
+}
+
+.high-priority-descp {
+  background-color: #c40707;
+}
+
+.low-priority-descp {
+  background-color: #04aa6d;
+}
+
+.normal-priority-descp {
+  background-color: #c1e441;
+}

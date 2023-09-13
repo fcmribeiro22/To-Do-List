@@ -8,9 +8,9 @@ import { createTask } from "./factory.js";
 import { parseISO, compareAsc } from "date-fns";
 
 export function initiateApp() {
+  renderTasksUI();
   setupUIElements();
   renderProjects();
-  renderTasksUI();
 }
 
 function setupUIElements() {

@@ -2,12 +2,10 @@ import { createProject } from "./factory";
 
 let projects = [];
 
-// Load projects from localStorage if available when the app starts
 const storedProjects = JSON.parse(localStorage.getItem("projects"));
 if (storedProjects) {
   projects = storedProjects;
 } else {
-  // If there's no data in localStorage, initialize with a default project
   projects = [{ project: "General", tasks: [], selected: true }];
 }
 
