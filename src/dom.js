@@ -10,6 +10,7 @@ import { parseISO, compareAsc } from "date-fns";
 export function initiateApp() {
   setupUIElements();
   renderProjects();
+  renderTasksUI();
 }
 
 function setupUIElements() {
