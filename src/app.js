@@ -5,6 +5,16 @@ let projects = [];
 const storedProjects = JSON.parse(localStorage.getItem("projects"));
 if (storedProjects) {
   projects = storedProjects;
+  projects.forEach((project) => {
+    project.tasks.forEach((task) => {
+      task.toggleExpanded = function () {
+        this.expanded = !this.expanded;
+      };
+      task.toggleCompletion = function () {
+        this.completed = !this.completed;
+      };
+    });
+  });
 } else {
   projects = [{ project: "General", tasks: [], selected: true }];
 }
