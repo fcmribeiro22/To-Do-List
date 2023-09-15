@@ -250,6 +250,8 @@ function renderTasksUI() {
       deleteButton.addEventListener("click", () => {
         task.toggleCompletion();
         renderTasksUI();
+        let projects = getProjectsArray();
+        localStorage.setItem("projects", JSON.stringify(projects));
       });
     }
   }
