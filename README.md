@@ -1,5 +1,6 @@
 # To-Do-List
 
+![Screenshot](https://github.com/fcmribeiro22/To-Do-List-App/blob/main/image/Screenshot%202023-09-18%20231929.png)
 [LIVE PREVIEW](https://fcmribeiro22.github.io/To-Do-List-App/)
 
 ## Table of Contents
