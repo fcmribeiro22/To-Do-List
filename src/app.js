@@ -39,6 +39,6 @@ export function addTasktoProject(projectIndex, task) {
   updateLocalStorageProjects();
 }
 
-function updateLocalStorageProjects() {
+export function updateLocalStorageProjects() {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
